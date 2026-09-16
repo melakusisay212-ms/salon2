@@ -18,9 +18,11 @@ export function setLang(lang: Lang) {
   listeners.forEach((l) => l());
 }
 
-export function onLangChange(cb: () => void) {
+export function onLangChange(cb: () => void): () => void {
   listeners.add(cb);
-  return () => listeners.delete(cb);
+  return () => {
+    listeners.delete(cb);
+  };
 }
 
 function getPath(obj: any, path: string): any {
